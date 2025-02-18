@@ -1,0 +1,4 @@
+INDEX VERSION 1.134+E:\hoc_tap\LapTrinhAndroid\.metadata\.plugins\org.eclipse.jdt.core
+1865797976.index
+82233468.index
+1873995773.index

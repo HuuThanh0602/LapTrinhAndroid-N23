@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename type &apos;QuanLyLopHoc.Students&apos; to &apos;Student&apos;&#x0D;&#x0A;- Original project: &apos;BaiTap_Java_01&apos;&#x0D;&#x0A;- Original element: &apos;QuanLyLopHoc.Students&apos;&#x0D;&#x0A;- Renamed element: &apos;QuanLyLopHoc.Student&apos;&#x0D;&#x0A;- Update references to refactored element&#x0D;&#x0A;- Update textual occurrences in comments and strings" description="Rename type &apos;Students&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.type" input="/src&lt;QuanLyLopHoc{Students.java[Students" matchStrategy="1" name="Student" qualified="false" references="true" similarDeclarations="false" stamp="1739886264561" textual="false" version="1.0"/>
+</session>
