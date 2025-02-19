@@ -1,0 +1,50 @@
+package bai_02;
+
+import java.util.Scanner;
+
+public class Test {
+	public static void main(String[] args) {
+		Ngay n1 = new Ngay(15, 2, 2000);
+		Ngay n2 = new Ngay(18, 9, 2002);
+		Ngay n3 = new Ngay(21, 2, 2000);
+		
+		GiamDocTaiChinh tc1 = new GiamDocTaiChinh("Nguyễn Thu Hương", n3, 45);
+		GiamDocDieuHanh dh1 = new GiamDocDieuHanh("Nguyễn Văn Hữu", n1, 54);
+		
+		System.out.println("Ngày nhậm chức của CFO: " + tc1.layRaNgayNhanChuc());
+		System.out.println("Ngày nhậm chức của CEO: " + dh1.layRaNgayNhanChuc());
+		
+		System.out.println("Học vị của CFO là: " + tc1.hocVi());
+		System.out.println("Học vị của CEO là: " + dh1.hocVi());
+		
+		System.out.println("Tên giám đốc CFO là: " + tc1.layRaTenGiamDoc());
+		System.out.println("Tên giám đốc CEO là: " + dh1.layRaTenGiamDoc());
+		
+		System.out.println("----------------------------------- ");
+		Scanner sc = new Scanner(System.in);
+        GiamDocTaiChinh tc3 = new GiamDocTaiChinh();
+        
+        System.out.println("Nhập thông tin cho giám đốc tài chính (CFO): ");
+        tc3.nhapGiamDocTaiChinh();
+        
+        System.out.println();
+        
+        System.out.println("Thông tin giám đốc tài chính (CFO): ");
+        tc3.xuatGiamDocTaiChinh();
+        
+  
+        System.out.println("----------------------------------- ");
+       
+        GiamDocDieuHanh dh3 = new GiamDocDieuHanh();
+        
+        System.out.println("Nhập thông tin cho giám đốc điều hành (CEO): ");
+        dh3.nhapGiamDocDieuHanh();
+        
+        System.out.println();
+        System.out.println("Thông tin giám đốc tài chính (CFO): ");
+        dh3.xuatGiamDocDieuHanh();
+		
+		
+	}
+
+}

@@ -1,0 +1,187 @@
+package bai_02;
+
+import java.util.Scanner;
+
+public abstract class GiamDoc implements ManagerInterface {
+	protected String chucVu;
+	protected String tenGiamDoc;
+	protected String queQuan;
+	protected Ngay ngayNhanChuc;
+	protected int tuoi;
+	protected double luong;
+	
+	public GiamDoc() {
+		this.chucVu = "";
+		this.tenGiamDoc = "";
+		this.queQuan = "";
+		this.ngayNhanChuc = null ;
+		this.tuoi = 0;
+		this.luong = 0;
+	}
+	public GiamDoc(String chucVu, String tenGiamDoc,String queQuan, Ngay ngayNhanChuc, int tuoi,double luong) {
+		this.chucVu = chucVu;
+		this.tenGiamDoc = tenGiamDoc;
+		this.queQuan = queQuan;
+		this.ngayNhanChuc = ngayNhanChuc;
+		this.tuoi = tuoi;
+		this.luong = luong;
+	}
+
+	public String getChucVu() {
+		return chucVu;
+	}
+
+	public void setChucVu(String chucVu) {
+		this.chucVu = chucVu;
+	}
+
+	public String getTenGiamDoc() {
+		return tenGiamDoc;
+	}
+
+	public void setTenGiamDoc(String tenGiamDoc) {
+		this.tenGiamDoc = tenGiamDoc;
+	}
+	
+	public String getQueQuan() {
+		return queQuan;
+	}
+
+	public void setQueQuan(String queQuan) {
+		this.queQuan = queQuan;
+	}
+
+	public Ngay getNgayNhanChuc() {
+		return ngayNhanChuc;
+	}
+
+	public void setNgayNhanChuc(Ngay ngayNhanChuc) {
+		this.ngayNhanChuc = ngayNhanChuc;
+	}
+
+	public int getTuoi() {
+		return tuoi;
+	}
+
+	public void setTuoi(int tuoi) {
+		this.tuoi = tuoi;
+	}
+	
+	public double getLuong() {
+		return luong;
+	}
+
+	public void setLuong(double luong) {
+		this.luong = luong;
+	}
+	
+	public String layRaNgayBoNhiem() {
+	    return this.ngayNhanChuc.getDay() + "/" + this.ngayNhanChuc.getThang() + "/" + this.ngayNhanChuc.getNam();
+	}
+
+	public abstract String hocVi();
+	
+	//hàm nhập dữ liệu
+	public void nhapThongTinGiamDoc(Scanner sc) throws InvalidInputException {
+	    
+
+		// Nhập chức vụ
+	    while (true) {
+	        try {
+	            System.out.print("Nhập chức vụ: ");
+	            this.chucVu = sc.nextLine();
+	            if (this.chucVu.trim().isEmpty()) {
+	                throw new InvalidInputException("Chức vụ không được để trống.");
+	            }
+	            break; // valid input, exit loop
+	        } catch (InvalidInputException e) {
+	            System.out.println(e.getMessage());
+	        }
+	    }
+
+	    // Nhập tên giám đốc
+	    while (true) {
+	        try {
+	            System.out.print("Nhập tên giám đốc: ");
+	            this.tenGiamDoc = sc.nextLine();
+	            if (this.tenGiamDoc.trim().isEmpty()) {
+	                throw new InvalidInputException("Tên giám đốc không được để trống.");
+	            }
+	            break;
+	        } catch (InvalidInputException e) {
+	            System.out.println(e.getMessage());
+	        }
+	    }
+
+	    // Nhập quê quán
+	    while (true) {
+	        try {
+	            System.out.print("Nhập quê quán: ");
+	            this.queQuan = sc.nextLine();
+	            if (this.queQuan.trim().isEmpty()) {
+	                throw new InvalidInputException("Quê quán không được để trống.");
+	            }
+	            break;
+	        } catch (InvalidInputException e) {
+	            System.out.println(e.getMessage());
+	        }
+	    }
+
+	    // Nhập ngày nhận chức
+	    while (true) {
+	        try {
+	            System.out.print("Nhập ngày nhận chức (ngày tháng năm): ");
+	            int day = sc.nextInt();
+	            int month = sc.nextInt();
+	            int year = sc.nextInt();
+	            this.ngayNhanChuc = new Ngay(day, month, year); 
+	            break;
+	        } catch (Exception e) {
+	            sc.nextLine(); 
+	            System.out.println("Ngày nhận chức không hợp lệ. Vui lòng nhập lại.");
+	        }
+	    }
+
+	    // Nhập tuổi
+	    while (true) {
+	        try {
+	            System.out.print("Nhập tuổi: ");
+	            this.tuoi = sc.nextInt();
+	            if (this.tuoi < 30 || this.tuoi > 70) {
+	                throw new InvalidInputException("Tuổi không hợp lệ! Phải trong khoảng 30 đến 70.");
+	            }
+	            break;
+	        } catch (Exception e) {
+	            sc.nextLine();
+	            System.out.println("Tuổi phải là số nguyên trong khoảng 30 đến 70.");
+	        }
+	    }
+
+	    // Nhập lương
+	    while (true) {
+	        try {
+	            System.out.print("Nhập lương: ");
+	            this.luong = sc.nextDouble();
+	            if (this.luong < 1000) {
+	                throw new InvalidInputException("Lương phải lớn hơn 1000$.");
+	            }
+	            break;
+	        } catch (Exception e) {
+	            sc.nextLine(); // Clear the invalid input
+	            System.out.println("Lương phải là một số hợp lệ lớn hơn 1000$.");
+	        }
+	    }
+	}
+
+
+    // Hàm xuất thông tin Giám đốc
+    public void xuatThongTinGiamDoc() {
+        System.out.println("Chức vụ: " + this.chucVu);
+        System.out.println("Tên Giám đốc: " + this.tenGiamDoc);
+        System.out.println("Quê quán Giám đốc: " + this.queQuan);
+        System.out.println("Ngày nhận chức: " + layRaNgayBoNhiem());
+        System.out.println("Tuổi: " + this.tuoi);
+        System.out.println("Lương: " + this.luong + " $");
+    }
+}
+	

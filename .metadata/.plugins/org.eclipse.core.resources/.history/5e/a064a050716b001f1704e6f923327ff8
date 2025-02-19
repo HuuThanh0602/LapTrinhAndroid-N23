@@ -1,0 +1,27 @@
+package bai_04;
+
+public class Fibonacci {
+
+	 public static void Fibonacci(int Max) {
+		 	int fisrtNumber = 0;
+		 	int secondNumber = 1;
+		 	int fibonacci = '\0';
+		 	
+		 	System.out.print(fisrtNumber + " ");
+		 	System.out.print(secondNumber + " ");
+		 	
+		 	for (int i = 2; i < Max; i++) {
+		 		fibonacci = fisrtNumber + secondNumber;
+		 		
+		 		System.out.print(fibonacci + " ");
+				
+		 		fisrtNumber = secondNumber;
+		 		secondNumber = fibonacci;
+			}
+		}
+	 
+	 public static void main(String[] args) {
+		Fibonacci(100);
+	}
+}
+

@@ -1,0 +1,119 @@
+package bai_02;
+
+import java.util.Scanner;
+
+public abstract class GiamDoc implements ManagerInterface {
+	protected String chucVu;
+	protected String tenGiamDoc;
+	protected String queQuan;
+	protected Ngay ngayNhanChuc;
+	protected int tuoi;
+	protected double luong;
+	
+	public GiamDoc() {
+		this.chucVu = "";
+		this.tenGiamDoc = "";
+		this.queQuan = "";
+		this.ngayNhanChuc = null ;
+		this.tuoi = 0;
+		this.luong = 0;
+	}
+	public GiamDoc(String chucVu, String tenGiamDoc,String queQuan, Ngay ngayNhanChuc, int tuoi,double luong) {
+		this.chucVu = chucVu;
+		this.tenGiamDoc = tenGiamDoc;
+		this.queQuan = queQuan;
+		this.ngayNhanChuc = ngayNhanChuc;
+		this.tuoi = tuoi;
+		this.luong = luong;
+	}
+
+	public String getChucVu() {
+		return chucVu;
+	}
+
+	public void setChucVu(String chucVu) {
+		this.chucVu = chucVu;
+	}
+
+	public String getTenGiamDoc() {
+		return tenGiamDoc;
+	}
+
+	public void setTenGiamDoc(String tenGiamDoc) {
+		this.tenGiamDoc = tenGiamDoc;
+	}
+	
+	public String getQueQuan() {
+		return queQuan;
+	}
+
+	public void setQueQuan(String queQuan) {
+		this.queQuan = queQuan;
+	}
+
+	public Ngay getNgayNhanChuc() {
+		return ngayNhanChuc;
+	}
+
+	public void setNgayNhanChuc(Ngay ngayNhanChuc) {
+		this.ngayNhanChuc = ngayNhanChuc;
+	}
+
+	public int getTuoi() {
+		return tuoi;
+	}
+
+	public void setTuoi(int tuoi) {
+		this.tuoi = tuoi;
+	}
+	
+	public double getLuong() {
+		return luong;
+	}
+
+	public void setLuong(double luong) {
+		this.luong = luong;
+	}
+	
+	public String layRaNgayBoNhiem() {
+	    return this.ngayNhanChuc.getDay() + "/" + this.ngayNhanChuc.getThang() + "/" + this.ngayNhanChuc.getNam();
+	}
+
+	public abstract String hocVi();
+	
+	// Hàm nhập thông tin Giám đốc
+    public void nhapGiamDoc() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Nhập chức vụ: ");
+        this.chucVu = sc.nextLine();
+
+        System.out.println("Nhập tên giám đốc: ");
+        this.tenGiamDoc = sc.nextLine();
+        
+        System.out.println("Nhập quê quán giám đốc: ");
+        this.queQuan = sc.nextLine();
+
+        System.out.println("Nhập ngày nhận chức (ngày tháng năm): ");
+        int day = sc.nextInt();
+        int month = sc.nextInt();
+        int year = sc.nextInt();
+        this.ngayNhanChuc = new Ngay(day, month, year);
+
+        System.out.println("Nhập tuổi giám đốc: ");
+        this.tuoi = sc.nextInt();
+        
+        System.out.println("Nhập lương giám đốc: ");
+        this.luong = sc.nextInt();
+    }
+
+    // Hàm xuất thông tin Giám đốc
+    public void xuatGiamDoc() {
+        System.out.println("Chức vụ: " + this.chucVu);
+        System.out.println("Tên Giám đốc: " + this.tenGiamDoc);
+        System.out.println("Quê quán Giám đốc: " + this.queQuan);
+        System.out.println("Ngày nhận chức: " + layRaNgayBoNhiem());
+        System.out.println("Tuổi: " + this.tuoi);
+        System.out.println("Lương: " + this.luong);
+    }
+}
+	

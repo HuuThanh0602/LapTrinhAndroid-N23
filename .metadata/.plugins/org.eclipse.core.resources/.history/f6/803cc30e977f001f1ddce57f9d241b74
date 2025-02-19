@@ -1,0 +1,101 @@
+package bai_02;
+
+import java.util.Scanner;
+
+public class Ngay {
+    private int day, thang, nam;
+
+    public Ngay() {
+        this.day = 0;
+        this.thang = 0;
+        this.nam = 0;
+    }
+
+    public Ngay(int day, int thang, int nam) throws InvalidInputException {
+        if (!isValidDate(day, thang, nam)) {
+            throw new InvalidInputException("Ngày không hợp lệ.");
+        }
+        this.day = day;
+        this.thang = thang;
+        this.nam = nam;
+    }
+
+    public int getDay() {
+        return day;
+    }
+
+    public void setDay(int day) {
+        this.day = day;
+    }
+
+    public int getThang() {
+        return thang;
+    }
+
+    public void setThang(int thang) {
+        this.thang = thang;
+    }
+
+    public int getNam() {
+        return nam;
+    }
+
+    public void setNam(int nam) {
+        this.nam = nam;
+    }
+
+    // Hàm kiểm tra năm nhuận
+    private boolean isLeapYear(int year) {
+        return (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0);
+    }
+
+    // Hàm kiểm tra tính hợp lệ của ngày
+    private boolean isValidDate(int day, int thang, int nam) {
+        if (thang < 1 || thang > 12) {
+            return false; // Tháng không hợp lệ
+        }
+
+        int[] daysInMonth = {31, (isLeapYear(nam) ? 29 : 28), 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+        if (day < 1 || day > daysInMonth[thang - 1]) {
+            return false; // Ngày không hợp lệ
+        }
+
+        if (nam < 1900 || nam > 2100) {
+            return false; // Năm không hợp lệ
+        }
+
+        return true; // Ngày hợp lệ
+    }
+
+    // Hàm nhập ngày, tháng, năm với xử lý ngoại lệ
+    public void nhapNgay() {
+        Scanner sc = new Scanner(System.in);
+        boolean isValid = false; // Biến để kiểm tra tính hợp lệ của ngày nhập
+        while (!isValid) {
+            try {
+                System.out.print("Nhập ngày: ");
+                this.day = sc.nextInt();
+
+                System.out.print("Nhập tháng: ");
+                this.thang = sc.nextInt();
+
+                System.out.print("Nhập năm: ");
+                this.nam = sc.nextInt();
+
+                // Kiểm tra tính hợp lệ của ngày
+                if (!isValidDate(this.day, this.thang, this.nam)) {
+                    throw new InvalidInputException("Ngày, tháng, năm không hợp lệ. Vui lòng nhập lại.");
+                }
+
+                isValid = true; // Thoát vòng lặp nếu nhập hợp lệ
+            } catch (InvalidInputException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+    }
+
+    // Hàm xuất ngày, tháng, năm
+    public void xuatNgay() {
+        System.out.println("Ngày: " + this.day + "/" + this.thang + "/" + this.nam);
+    }
+}

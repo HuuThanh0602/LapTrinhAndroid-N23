@@ -1,0 +1,62 @@
+package bai_02;
+
+public abstract class GiamDoc implements ManagerInterface {
+	protected String chucVu;
+	protected String tenGiamDoc;
+	protected Ngay ngayNhanChuc;
+	protected int tuoi;
+	
+	public GiamDoc() {
+		this.chucVu = "";
+		this.tenGiamDoc = "";
+		this.ngayNhanChuc = null ;
+		this.tuoi = 0;
+	}
+	public GiamDoc(String chucVu, String tenGiamDoc, Ngay ngayNhanChuc, int tuoi) {
+		this.chucVu = chucVu;
+		this.tenGiamDoc = tenGiamDoc;
+		this.ngayNhanChuc = ngayNhanChuc;
+		this.tuoi = tuoi;
+	}
+
+	public String getChucVu() {
+		return chucVu;
+	}
+
+	public void setChucVu(String chucVu) {
+		this.chucVu = chucVu;
+	}
+
+	public String getTenGiamDoc() {
+		return tenGiamDoc;
+	}
+
+	public void setTenGiamDoc(String tenGiamDoc) {
+		this.tenGiamDoc = tenGiamDoc;
+	}
+
+	public Ngay getNgayNhanChuc() {
+		return ngayNhanChuc;
+	}
+
+	public void setNgayNhanChuc(Ngay ngayNhanChuc) {
+		this.ngayNhanChuc = ngayNhanChuc;
+	}
+
+	public int getTuoi() {
+		return tuoi;
+	}
+
+	public void setTuoi(int tuoi) {
+		this.tuoi = tuoi;
+	}
+	
+	public int layRaNgayNhanChuc() {
+		return this.ngayNhanChuc.getDay();
+	}
+	
+	public abstract String hocVi();
+	
+	
+
+}

@@ -1,0 +1,55 @@
+package bai_02;
+
+public class GiamDocDieuHanh extends GiamDoc implements ManagerInterface {
+    private int soNamKinhNghiem; // Thuộc tính mới: Số năm kinh nghiệm
+
+    // Hàm khởi tạo không tham số
+    public GiamDocDieuHanh() {
+        super("CEO", "", "", null, 0, 0);
+        this.soNamKinhNghiem = 0; // Gán giá trị mặc định cho số năm kinh nghiệm
+    }
+
+    // Hàm khởi tạo có tham số
+    public GiamDocDieuHanh(String tenGiamDoc, String queQuan, Ngay ngayNhanChuc, int tuoi, double luong, int soNamKinhNghiem) {
+        super("CEO", tenGiamDoc, queQuan, ngayNhanChuc, tuoi, luong);
+        this.soNamKinhNghiem = soNamKinhNghiem; // Gán giá trị cho số năm kinh nghiệm
+    }
+
+    // Getter cho thuộc tính số năm kinh nghiệm
+    public int layRaSoNamKinhNghiem() {
+        return this.soNamKinhNghiem;
+    }
+
+    // Setter cho thuộc tính số năm kinh nghiệm
+    public void datSoNamKinhNghiem(int soNamKinhNghiem) {
+        this.soNamKinhNghiem = soNamKinhNghiem;
+    }
+
+    public String hocVi() {
+        return "Giáo sư";
+    }
+
+    public String layRaTenGiamDoc() {
+        return tenGiamDoc;
+    }
+
+    // Hàm nhập dữ liệu cho GiamDocDieuHanh
+    public void nhapGiamDocDieuHanh() {
+        super.nhapGiamDoc(); // Nhập các thông tin từ lớp cha GiamDoc
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Nhập số năm kinh nghiệm: ");
+        this.soNamKinhNghiem = scanner.nextInt(); // Nhập số năm kinh nghiệm
+    }
+
+    // Hàm xuất dữ liệu cho GiamDocDieuHanh
+    public void xuatGiamDocDieuHanh() {
+        super.xuatGiamDoc(); // Xuất các thông tin từ lớp cha GiamDoc
+        System.out.println("Học vị: " + hocVi());
+        System.out.println("Số năm kinh nghiệm: " + this.soNamKinhNghiem); // Xuất thêm số năm kinh nghiệm
+    }
+
+    @Override
+    public double layRaLuongGiamDoc() {
+        return this.luong;
+    }
+}

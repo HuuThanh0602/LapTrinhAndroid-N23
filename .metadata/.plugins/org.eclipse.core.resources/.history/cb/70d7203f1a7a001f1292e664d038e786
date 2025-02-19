@@ -1,0 +1,36 @@
+package bai_02;
+
+public class GiamDocTaiChinh extends GiamDoc implements ManagerInterface {
+	
+	  // Hàm khởi tạo không tham số
+    public GiamDocTaiChinh() {
+        super("CFO", "", null, 0);
+    }
+
+	public GiamDocTaiChinh(String tenGiamDoc, Ngay ngayNhanChuc, int tuoi) {
+		super("CFO", tenGiamDoc, ngayNhanChuc, tuoi);
+	}
+
+	
+	public String hocVi() {
+		return "Phó giáo sư, tiến sĩ";
+	}
+
+	@Override
+	public String layRaTenGiamDoc() {
+		return tenGiamDoc;
+	}
+	
+	  // Hàm nhập dữ liệu cho GiamDocTaiChinh
+    public void nhapGiamDocTaiChinh() {
+        super.nhapGiamDoc();
+    }
+
+    // Hàm xuất dữ liệu cho GiamDocTaiChinh
+    public void xuatGiamDocTaiChinh() {
+        super.xuatGiamDoc();
+        System.out.println("Học vị: " + hocVi());
+    }
+	
+
+}

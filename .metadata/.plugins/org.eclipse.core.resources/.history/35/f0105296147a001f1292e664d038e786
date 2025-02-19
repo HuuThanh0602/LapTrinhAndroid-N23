@@ -1,0 +1,28 @@
+package bai_02;
+
+public class GiamDocDieuHanh extends GiamDoc implements ManagerInterface {
+
+	public GiamDocDieuHanh( String tenGiamDoc, Ngay ngayNhanChuc, int tuoi) {
+		super("CEO", tenGiamDoc, ngayNhanChuc, tuoi);
+	}
+
+	public String hocVi() {
+		return "Giáo sư";
+	}
+
+	public String layRaTenGiamDoc() {
+		return tenGiamDoc;
+	}
+	
+	// Hàm nhập dữ liệu cho GiamDocDieuHanh
+    public void nhapGiamDocDieuHanh() {
+        super.nhapGiamDoc();
+    }
+
+    // Hàm xuất dữ liệu cho GiamDocDieuHanh
+    public void xuatGiamDocDieuHanh() {
+        super.xuatGiamDoc();
+        System.out.println("Học vị: " + hocVi());
+    }
+
+}

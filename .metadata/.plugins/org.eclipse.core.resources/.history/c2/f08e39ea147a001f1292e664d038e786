@@ -1,0 +1,60 @@
+package bai_02;
+
+public class Ngay {
+	private int day, thang, nam;
+	
+	public Ngay() {
+		this.day = 0;
+		this.thang = 0;
+		this.nam = 0;
+	}
+
+	public Ngay(int day, int thang, int nam) {
+		this.day = day;
+		this.thang = thang;
+		this.nam = nam;
+	}
+
+	public int getDay() {
+		return day;
+	}
+
+	public void setDay(int day) {
+		this.day = day;
+	}
+
+	public int getThang() {
+		return thang;
+	}
+
+	public void setThang(int thang) {
+		this.thang = thang;
+	}
+
+	public int getNam() {
+		return nam;
+	}
+
+	public void setNam(int nam) {
+		this.nam = nam;
+	}
+	
+	 // Hàm nhập ngày, tháng, năm
+    public void nhapNgay() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Nhập ngày: ");
+        this.day = sc.nextInt();
+        
+        System.out.println("Nhập tháng: ");
+        this.thang = sc.nextInt();
+        
+        System.out.println("Nhập năm: ");
+        this.nam = sc.nextInt();
+    }
+
+    // Hàm xuất ngày, tháng, năm
+    public void xuatNgay() {
+        System.out.println("Ngày: " + this.day + "/" + this.thang + "/" + this.nam);
+    }
+
+}

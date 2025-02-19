@@ -1,0 +1,10 @@
+package bai_02;
+
+public interface ManagerInterface {
+	//các phương thức bên trong được hiểu là abstract dù có gi hay kh
+	
+	public String layRaNgayNhanChuc();
+	
+	public String layRaTenGiamDoc();
+
+}

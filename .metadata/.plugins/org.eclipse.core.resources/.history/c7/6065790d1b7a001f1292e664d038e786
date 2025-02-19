@@ -1,0 +1,38 @@
+package bai_02;
+
+public class GiamDocDieuHanh extends GiamDoc implements ManagerInterface {
+
+	  // Hàm khởi tạo không tham số
+    public GiamDocDieuHanh() {
+        super("CEO", "","", null, 0,0);
+        }
+	
+	public GiamDocDieuHanh( String tenGiamDoc,String queQuan, Ngay ngayNhanChuc, int tuoi,double luong) {
+		super("CEO", tenGiamDoc,queQuan, ngayNhanChuc, tuoi,luong);
+	}
+
+	public String hocVi() {
+		return "Giáo sư";
+	}
+
+	public String layRaTenGiamDoc() {
+		return tenGiamDoc;
+	}
+	
+	// Hàm nhập dữ liệu cho GiamDocDieuHanh
+    public void nhapGiamDocDieuHanh() {
+        super.nhapGiamDoc();
+    }
+
+    // Hàm xuất dữ liệu cho GiamDocDieuHanh
+    public void xuatGiamDocDieuHanh() {
+        super.xuatGiamDoc();
+        System.out.println("Học vị: " + hocVi());
+    }
+
+	@Override
+	public double layRaLuongGiamDoc() {
+		return luong;
+	}
+
+}

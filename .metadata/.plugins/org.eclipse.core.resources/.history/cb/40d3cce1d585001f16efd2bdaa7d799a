@@ -1,0 +1,83 @@
+package bai_02;
+
+import java.util.InputMismatchException;
+import java.util.Scanner;
+
+public class GiamDocDieuHanh extends GiamDoc implements ManagerInterface {
+    private int soNamKinhNghiem; 
+
+    
+    public int getSoNamKinhNghiem() {
+		return soNamKinhNghiem;
+	}
+
+
+	public void setSoNamKinhNghiem(int soNamKinhNghiem) {
+		this.soNamKinhNghiem = soNamKinhNghiem;
+	}
+
+
+	public GiamDocDieuHanh() {
+        super(" CEO", "", "", 0, 0);
+        this.soNamKinhNghiem = 0; 
+    }
+
+   
+    public GiamDocDieuHanh(String tenGiamDoc, String queQuan, int tuoi, double luong, int soNamKinhNghiem) {
+        super("CEO", tenGiamDoc, queQuan, tuoi, luong);
+        this.soNamKinhNghiem = soNamKinhNghiem; 
+    }
+
+
+    public int layRaSoNamKinhNghiem() {
+        return this.soNamKinhNghiem;
+    }
+
+  
+    public void datSoNamKinhNghiem(int soNamKinhNghiem) {
+        this.soNamKinhNghiem = soNamKinhNghiem;
+    }
+
+    public String hocVi() {
+        return "Giáo sư";
+    }
+
+    public String layRaTenGiamDoc() {
+        return tenGiamDoc;
+    }
+
+   
+    public void nhapGiamDocDieuHanh(Scanner sc ) throws InvalidInputException {
+    	super.nhapThongTinGiamDoc(sc);
+    	
+    	while(true) {
+    		try {
+                System.out.print("Nhập số năm kinh nghiệm: ");
+                this.soNamKinhNghiem = sc.nextInt();
+                if (this.soNamKinhNghiem < 0) {
+                    throw new InvalidInputException("Số năm kinh nghiệm không được âm.");
+                }
+                break;
+    		} catch (InputMismatchException e) {
+                System.out.println("Lỗi: Vui lòng nhập một số nguyên hợp lệ.");
+                sc.nextLine(); 
+            } catch (InvalidInputException e) {
+                System.out.println("Lỗi: " + e.getMessage());
+            }
+    		}
+    }
+   
+    public void xuatThongTinGiamDoc() {
+        super.xuatThongTinGiamDoc();
+        System.out.println("Số năm kinh nghiệm: " + this.soNamKinhNghiem + " năm"); 
+    }
+
+    @Override
+    public double layRaLuongGiamDoc() {
+        return this.luong;
+    }
+    
+    public String toString() {
+        return super.toString() + ", Số năm kinh nghiệm: " + this.soNamKinhNghiem;
+    }
+}

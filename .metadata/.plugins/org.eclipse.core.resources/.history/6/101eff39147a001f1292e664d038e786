@@ -1,0 +1,19 @@
+package bai_02;
+
+public class GiamDocDieuHanh extends GiamDoc implements ManagerInterface {
+
+	public GiamDocDieuHanh( String tenGiamDoc, Ngay ngayNhanChuc, int tuoi) {
+		super("CEO", tenGiamDoc, ngayNhanChuc, tuoi);
+	}
+
+	@Override
+	public String hocVi() {
+		return "Giáo sư";
+	}
+
+	@Override
+	public String layRaTenGiamDoc() {
+		return tenGiamDoc;
+	}
+
+}

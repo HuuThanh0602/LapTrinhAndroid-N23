@@ -1,0 +1,22 @@
+package bai_04;
+
+import java.math.BigInteger;
+
+public class Fibonacci {
+	 public static void main(String[] args) {
+		 int count = 100;
+		BigInteger fisrtNumber = BigInteger.ONE;
+	 	BigInteger secondNumber = BigInteger.ONE;
+	 	System.out.println(fisrtNumber + " ");
+	 	System.out.println(secondNumber + " ");
+	 	
+	 	for (int i = 2; i <= count ; i++) {
+	 		BigInteger next=fisrtNumber.add(secondNumber);
+	 		System.out.println(next + " ");
+	 		fisrtNumber = secondNumber;
+	 		secondNumber = next;
+		}
+	 		
+	
+	}
+}

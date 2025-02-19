@@ -1,0 +1,9 @@
+package bai_02;
+
+public interface ManagerInterface {
+	
+	public String layRaNgayNhanChuc();
+	
+	public String layRaTenGiamDoc();
+
+}

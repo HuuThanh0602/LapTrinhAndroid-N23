@@ -1,0 +1,84 @@
+package bai_02;
+
+import java.util.Scanner;
+
+public class GiamDocTaiChinh extends GiamDoc implements ManagerInterface {
+	
+	private double phuCap;
+	
+	  public double getPhuCap() {
+		return phuCap;
+	}
+
+	public void setPhuCap(double phuCap) {
+		this.phuCap = phuCap;
+	}
+
+	// Hàm khởi tạo không tham số
+    public GiamDocTaiChinh() {
+        super("CFO", "","", 0,0);
+        this.phuCap = 0;
+    }
+
+    public GiamDocTaiChinh(String tenGiamDoc, String queQuan, int tuoi, double luong, double phuCap) {		
+    	super(" CFO", tenGiamDoc,queQuan, tuoi,luong);
+		 this.phuCap = phuCap;
+	}
+
+    public double layRaPhuCap() {
+        return this.phuCap;
+    }
+
+    public void datPhuCap(double phuCap) {
+        this.phuCap = phuCap;
+    }
+    
+    
+	public String hocVi() {
+		return "Phó giáo sư, tiến sĩ";
+	}
+
+	@Override
+	public String layRaTenGiamDoc() {
+		return tenGiamDoc;
+	}
+	
+	  // Hàm nhập dữ liệu cho GiamDocTaiChinh
+
+    public void nhapGiamDocTaiChinh(Scanner sc) throws InvalidInputException {
+    	
+    	super.nhapThongTinGiamDoc(sc);
+    	while(true) {
+    		 try {
+    	            System.out.print("Nhập phụ cấp: ");
+    	            this.phuCap = sc.nextDouble();
+    	            if (this.phuCap < 0) {
+    	                throw new InvalidInputException("Phụ cấp không được âm.");
+    	            }
+    	            break;
+    	        } 
+    		 
+    		 catch (InvalidInputException e) {
+    	            throw e;
+    		 }
+    	}
+       
+    }
+
+    // Hàm xuất dữ liệu cho GiamDocTaiChinh
+    public void xuatThongTinGiamDoc() {
+        super.xuatThongTinGiamDoc();
+        System.out.println("Phụ cấp: " + this.phuCap + " $");
+    }
+
+	@Override
+	public double layRaLuongGiamDoc() {
+		return this.luong;
+	}
+	
+	public String toString() {
+        return super.toString() + ", Phụ cấp: " + this.phuCap;
+    }
+	
+
+}

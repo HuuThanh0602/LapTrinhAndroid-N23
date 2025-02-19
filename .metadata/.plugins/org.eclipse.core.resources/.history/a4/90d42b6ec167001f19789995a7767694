@@ -1,0 +1,27 @@
+
+public class ViDu {
+	public static void main(String[] args) {
+		String s1 ="titv.vn";
+		String s2 ="TITV.vn";
+		String s3 = "titv.vn";
+		
+		//ham equals => ss 2 chuoi giong nhau, co phan biet viet hoa viet thuong
+	System.out.println("s1 equals s2: "+ s1.equals(s2));
+	System.out.println("s1 equals s3: "+ s1.equals(s3));
+
+	//ham equalsIgnoreCase =>ss 2 chuoi giong nhau,khong phan biet chu hoa chu thuong
+	System.out.println("s1 equalsIgnoreCase s2: "+ s1.equalsIgnoreCase(s2));
+	System.out.println("s1 equalsIgnoreCase s3: "+ s1.equalsIgnoreCase(s3));
+
+	// ham compareTo => do so sanh > < =
+	String sv1 = "Nguyễn Văn A";
+	String sv2 = "Nguyễn Văn B";
+	String sv3 = "Nguyễn Văn ";
+	
+	System.out.println("sv1 compareTo sv2: "+sv1.compareTo(sv2));
+	System.out.println("sv1 compareTo sv3: "+sv1.compareTo(sv3));
+
+	
+	
+	}
+}

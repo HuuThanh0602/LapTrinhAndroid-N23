@@ -1,0 +1,297 @@
+package bai_02;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+public class Test1 {
+	private static final String TEP_NHI_PHAN = "giamdoc.dat";
+    private static final String TEP_VAN_BAN = "giamdoc.txt";
+    
+    private static List<GiamDoc> danhSachGiamDoc = new ArrayList<>();
+
+    public static void main(String[] args) throws InvalidInputException {
+        Scanner sc = new Scanner(System.in);
+        int luaChon;
+
+        do {
+            System.out.println("\n1. Thêm giám đốc tài chính");
+            System.out.println("2. Thêm giám đốc điều hành");
+            System.out.println("3. Hiển thị danh sách giám đốc");
+            System.out.println("4. Xóa giám đốc theo tên");
+            System.out.println("5. Tìm kiếm giám đốc theo tên");
+            System.out.println("6. Lưu danh sách vào tệp nhị phân");
+            System.out.println("7. Tải danh sách từ tệp nhị phân");
+            System.out.println("8. Lưu danh sách vào tệp văn bản");
+            System.out.println("9. Tải danh sách từ tệp văn bản");
+            System.out.println("10. Thoát");
+            System.out.print("Chọn chức năng: ");
+            luaChon = sc.nextInt();
+            sc.nextLine(); 
+
+            switch (luaChon) {
+                case 1:
+                    GiamDocTaiChinh tc = new GiamDocTaiChinh();
+                    try {
+                        tc.nhapGiamDocTaiChinh(sc);
+                        danhSachGiamDoc.add(tc);
+                    } catch (InvalidInputException e) {
+                        System.out.println("Lỗi: " + e.getMessage());
+                    }
+                    break;
+                case 2:
+                    GiamDocDieuHanh dh = new GiamDocDieuHanh();
+                    try {
+                        dh.nhapGiamDocDieuHanh(sc);
+                        danhSachGiamDoc.add(dh);
+                    } catch (InvalidInputException e) {
+                        System.out.println("Lỗi: " + e.getMessage());
+                    }
+                    break;
+                case 3:
+                    hienThiDanhSach();
+                    break;
+                case 4:
+                    System.out.print("Nhập tên giám đốc cần xóa: ");
+                    String tenXoa = sc.nextLine();
+                    xoaGiamDoc(tenXoa);
+                    break;
+                case 5:
+                    System.out.print("Nhập tên giám đốc cần tìm: ");
+                    String tenTim = sc.nextLine();
+                    timGiamDoc(tenTim);
+                    break;
+                case 6:
+                    luuDanhSachVaoFileNhiPhan();
+                    break;
+                case 7:
+                    taiDanhSachTuFileNhiPhan();
+                    break;
+                case 8:
+                    luuDanhSachVaoFileVanBan();
+                    break;
+                case 9:
+                    taiDanhSachTuFileVanBan();
+                    break;
+                case 10:
+                    System.out.println("Kết thúc chương trình.");
+                    break;
+                default:
+                    System.out.println("Lựa chọn không hợp lệ. Vui lòng chọn lại.");
+            }
+        } while (luaChon != 10);
+    }
+
+    // Hiển thị danh sách giám đốc
+    public static void hienThiDanhSach() {
+        if (danhSachGiamDoc.isEmpty()) {
+            System.out.println("Danh sách giám đốc trống.");
+        } else {
+            for (GiamDoc gd : danhSachGiamDoc) {
+                gd.xuatThongTinGiamDoc();
+                System.out.println("------------------------------------");
+            }
+        }
+    }
+
+    // Xóa giám đốc theo tên
+    public static void xoaGiamDoc(String ten) {
+        boolean found = false;
+        for (int i = 0; i < danhSachGiamDoc.size(); i++) {
+            if (danhSachGiamDoc.get(i).layRaTenGiamDoc().equalsIgnoreCase(ten)) {
+                danhSachGiamDoc.remove(i);
+                System.out.println("Đã xóa giám đốc: " + ten);
+                found = true;
+                break;
+            }
+        }
+        if (!found) {
+            System.out.println("Không tìm thấy giám đốc với tên: " + ten);
+        }
+    }
+
+    //5. Tìm kiếm giám đốc theo tên
+    public static void timGiamDoc(String ten) {
+        boolean found = false;
+        for (GiamDoc gd : danhSachGiamDoc) {
+            if (gd.layRaTenGiamDoc().equalsIgnoreCase(ten)) {
+                System.out.println("Thông tin giám đốc tìm thấy:");
+                gd.xuatThongTinGiamDoc();
+                found = true;
+                break;
+            }
+        }
+        if (!found) {
+            System.out.println("Không tìm thấy giám đốc với tên: " + ten);
+        }
+    }
+    
+    // 6. Lưu danh sách vào tệp nhị phân
+    public static void luuDanhSachVaoFileNhiPhan() {
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(TEP_NHI_PHAN))) {
+            // Ghi danh sách giám đốc vào tệp nhị phân
+            oos.writeObject(danhSachGiamDoc);   
+            
+            System.out.println("Đã lưu danh sách vào tệp nhị phân.");
+        } catch (IOException e) {
+            System.out.println("Lỗi khi lưu vào tệp nhị phân: " + e.getMessage());
+        }
+    }
+
+
+ // 7.Tải danh sách từ tệp nhị phân
+    public static void taiDanhSachTuFileNhiPhan() {
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(TEP_NHI_PHAN))) {
+            // Đọc danh sách giám đốc từ tệp nhị phân
+        	 danhSachGiamDoc.clear(); 
+            danhSachGiamDoc = (List<GiamDoc>) ois.readObject(); 
+            
+            // In danh sách giám đốc ra console
+            for (GiamDoc gd : danhSachGiamDoc) {
+                System.out.println(gd);
+            }
+
+            System.out.println("Đã tải danh sách từ tệp nhị phân.");
+        } catch (IOException | ClassNotFoundException e) {
+            System.out.println("Lỗi khi tải từ tệp nhị phân: " + e.getMessage());
+        }
+    }
+
+
+    // 8.Lưu danh sách vào tệp văn bản
+    public static void luuDanhSachVaoFileVanBan() {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(TEP_VAN_BAN,StandardCharsets.UTF_8))) {
+            for (GiamDoc gd : danhSachGiamDoc) {
+                writer.write(gd.toString()); 
+                writer.newLine();
+            }
+            System.out.println("Đã lưu danh sách vào tệp văn bản.");
+        } catch (IOException e) {
+            System.out.println("Lỗi khi lưu vào tệp văn bản: " + e.getMessage());
+        }
+    }
+    
+ // 9. Tải danh sách từ tệp văn bản
+    public static void taiDanhSachTuFileVanBan() {
+        try (BufferedReader reader = new BufferedReader(new FileReader(TEP_VAN_BAN, StandardCharsets.UTF_8))) {
+            String line;
+            danhSachGiamDoc.clear(); // Xóa danh sách cũ trước khi thêm mới
+            while ((line = reader.readLine()) != null) {
+                String[] attributes = line.split(",");
+                if (attributes[0].trim().equalsIgnoreCase("CFO") && attributes.length == 6) {
+                    // Tạo đối tượng Giám đốc Tài chính (CFO)
+                    GiamDocTaiChinh giamDocTaiChinh = new GiamDocTaiChinh(
+                        attributes[1].trim(),  // Tên giám đốc
+                        attributes[2].trim(),  // Quê quán
+                        Integer.parseInt(attributes[3].trim()), // Tuổi
+                        Double.parseDouble(attributes[4].trim()), // Lương
+                        Double.parseDouble(attributes[5].trim())  // Phụ cấp
+                    );
+                    danhSachGiamDoc.add(giamDocTaiChinh); // Thêm vào danh sách giám đốc tài chính
+                } else if (attributes[0].trim().equalsIgnoreCase("CEO") && attributes.length == 6) {
+                    // Tạo đối tượng Giám đốc Điều hành (CEO)
+                    GiamDocDieuHanh giamDocDieuHanh = new GiamDocDieuHanh(
+                        attributes[1].trim(),  // Tên giám đốc
+                        attributes[2].trim(),  // Quê quán
+                        Integer.parseInt(attributes[3].trim()), // Tuổi
+                        Double.parseDouble(attributes[4].trim()), // Lương
+                        Integer.parseInt(attributes[5].trim()) // Số năm kinh nghiệm
+                    );
+                    danhSachGiamDoc.add(giamDocDieuHanh); // Thêm vào danh sách giám đốc điều hành
+                }
+            }
+
+            // In danh sách giám đốc sau khi phân loại
+            System.out.println("Danh sách giám đốc sau khi phân loại:");
+            for (GiamDoc gd : danhSachGiamDoc) {
+                gd.xuatThongTinGiamDoc(); // Gọi phương thức xuất thông tin
+                System.out.println("------------------------------------");
+            }
+            
+        } catch (IOException e) {
+            System.out.println("Lỗi đọc tệp: " + e.getMessage());
+        }
+    }
+
+		
+		
+		
+		
+		
+		
+		
+     }
+    
+    
+    
+
+
+//    // 9.Tải danh sách từ tệp văn bản
+//    public static void  taiDanhSachTuFileVanBan() throws InvalidInputException {
+//        try (BufferedReader reader = new BufferedReader(new FileReader(TEP_VAN_BAN, StandardCharsets.UTF_8))) {
+////            String line;
+////            danhSachGiamDoc.clear(); 
+////            while (true) {
+////                line = reader.readLine();
+////                if(line == null)
+////                	break;
+////                else {
+////                	 System.out.println(line);
+////                }
+//        	String line;
+//        	danhSachGiamDoc.clear();
+//        	while((line = reader.readLine()) != null) {
+//        		String [] p = line.split(", ");
+////        		String chucVu = p[0].split(": ")[1];
+////        		 	if (chucVu.equalsIgnoreCase("CEO")) {
+////        		 		String ten = p[1].split(": ")[1];
+////    		            String queQuan = p[2].split(": ")[1];
+////    		            String tuoi = p[3].split(": ")[1];
+////    		            String luong = p[4].split(": ")[1];
+////    		            //String hocVi = p[5].split(": ")[1];
+////    		            String soNamKinhNghiem = p[6].split(": ")[1];
+////    		            
+////    		            GiamDocDieuHanh dh = new GiamDocDieuHanh();
+////    		            
+////    		            dh.setTenGiamDoc(ten);
+////    		            dh.setQueQuan(queQuan);  		         
+////    		            dh.setTuoi(Integer.parseInt(tuoi));
+////    		            dh.setLuong(Double.parseDouble(luong));
+////    		            //dh.hocVi();
+////    		            dh.setSoNamKinhNghiem(Integer.parseInt(soNamKinhNghiem));
+////    		            
+////    		            danhSachGiamDoc.add(dh);
+////    		            
+////		            } else if (chucVu.equalsIgnoreCase("CFO")){
+////		            	String ten = p[1].split(": ")[1];
+////    		            String queQuan = p[2].split(": ")[1];	       
+////    		            String tuoi = p[3].split(": ")[1];
+////    		            String luong = p[4].split(": ")[1];
+////    		            //String hocVi = p[5].split(": ")[1];
+////    		            String phuCap = p[6].split(": ")[1];
+////    		            
+////    		            GiamDocTaiChinh tc = new GiamDocTaiChinh();
+////    		            
+////    		            tc.setTenGiamDoc(ten);
+////    		            tc.setQueQuan(queQuan);
+////    		            tc.setTuoi(Integer.parseInt(tuoi));
+////    		            tc.setLuong(Double.parseDouble(luong));
+////    		            //tc.hocVi();
+////    		            tc.setPhuCap(Double.parseDouble(phuCap));
+////    		            
+////    		            danhSachGiamDoc.add(tc);
+////		            }
+//
+//        	}
+//   }
+//
