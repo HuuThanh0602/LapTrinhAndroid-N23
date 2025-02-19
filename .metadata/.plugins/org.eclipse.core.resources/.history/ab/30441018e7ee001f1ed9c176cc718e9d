@@ -42,14 +42,6 @@ public class Main {
         s4.addSubjectScore("CSDL", 9.5);
         s4.addSubjectScore("LTUDCTBDĐ", 6);
         class2.addStudent(s4);
-        
-        Student s5 = new Student("Tran", "Cuong", "2000-03-15", "Da Nang", "CNTT2");
-        s5.addSubjectScore("OOP", 4);
-        s5.addSubjectScore("QLDA", 6);
-        s5.addSubjectScore("Machine Learning", 6.5);
-        s5.addSubjectScore("CSDL", 5.5);
-        s5.addSubjectScore("LTUDCTBDĐ", 6);
-        class2.addStudent(s5);
 
         classes.add(class2);
 
